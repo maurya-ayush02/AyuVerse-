@@ -437,6 +437,12 @@ p { margin: 0; }
 }
 
 @media (max-width: 640px) {
+  /* Full-width fixes — ticker and all containers */
+  .ticker { width: 100%; display: block; }
+  .container { width: 100%; box-sizing: border-box; }
+  .header, .footer { width: 100%; }
+  .hero, .subjects, .resources, .about, .cta { width: 100%; }
+  /* Layout fixes */
   .resource-grid { grid-template-columns: 1fr; }
   .hero { padding: 6.5rem 0 5rem; }
   .hero__glow { width: 100vw; }
