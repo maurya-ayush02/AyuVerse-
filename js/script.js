@@ -2,6 +2,14 @@
    AyuVerse — Interactions
 ========================================================== */
 
+// ===== Anti-cloning domain check (deterrent) =====
+(function () {
+  const allowed = 'maurya-ayush02.github.io';
+  if (location.hostname !== allowed && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+    document.documentElement.innerHTML = '<body style="background:#060814;color:#f3f4fb;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;text-align:center;"><div><h1>Unauthorized</h1><p>This content is only licensed to be served from <a href="https://' + allowed + '" style="color:#00c3fa">AyuVerse</a>.</p></div></body>';
+  }
+})();
+
 // ===== Mobile nav + Subjects dropdown =====
 (function () {
   const toggle = document.getElementById('navToggle');

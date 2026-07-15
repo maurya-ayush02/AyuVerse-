@@ -1,2 +1,15 @@
 node_modules/
 .DS_Store
+
+# Environment & secrets — never commit these
+.env
+.env.*
+config.js
+secrets.js
+
+# Editor & OS junk
+*.bak
+*.draft
+*.swp
+*.orig
+Thumbs.db
