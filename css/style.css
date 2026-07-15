@@ -321,6 +321,46 @@ p { margin: 0; }
 .about__content p:last-child { color: var(--text-primary); font-weight: 600; margin-bottom: 0; }
 
 /* ==========================================================
+   Creator card
+========================================================== */
+.creator-card {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  padding: 2rem 2.4rem;
+  margin-top: 3rem;
+  max-width: 560px;
+  margin-inline: auto;
+  transition: border-color .3s, box-shadow .3s;
+}
+.creator-card:hover { border-color: var(--border-strong); box-shadow: var(--shadow-glow); }
+.creator-card__avatar {
+  flex-shrink: 0;
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: var(--gradient-brand);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-weight: 700; font-size: 1.3rem;
+  color: #050611;
+  letter-spacing: .02em;
+}
+.creator-card__info { display: flex; flex-direction: column; gap: .4rem; }
+.creator-card__info .eyebrow { margin: 0; }
+.creator-card__info h3 { font-size: 1.25rem; margin: 0; }
+.creator-card__meta {
+  display: flex; flex-direction: column; gap: .45rem;
+  margin-top: .5rem;
+}
+.creator-card__meta li {
+  display: flex; align-items: center; gap: .5rem;
+  color: var(--text-secondary); font-size: .9rem;
+}
+.creator-card__meta svg { width: 15px; height: 15px; flex-shrink: 0; color: var(--c-cyan); }
+
+/* ==========================================================
    CTA
 ========================================================== */
 .cta { text-align: center; }
