@@ -40,7 +40,7 @@
    Reset & base
 ========================================================== */
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; width: 100%; }
+html { scroll-behavior: smooth; width: 100%; max-width: 100%; overflow-x: hidden; }
 
 body {
   margin: 0;
@@ -439,6 +439,11 @@ p { margin: 0; }
 @media (max-width: 640px) {
   .resource-grid { grid-template-columns: 1fr; }
   .hero { padding: 6.5rem 0 5rem; }
+  .hero__glow { width: 100vw; }
+  .hero__inner { max-width: 100%; }
+  .subject-card__art { padding: 1.25rem; }
+  .subject-card__body p { min-height: unset; }
+  .about__art img { max-width: 100%; }
   .footer__inner { grid-template-columns: 1fr; gap: 2rem; }
 }
 
