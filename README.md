@@ -1,107 +1,118 @@
-# AyuVerse
+# AyuVerse — Where Future Engineers Are Built 🚀
 
-**Where future engineers are built.**
+**AyuVerse** is a 100% free study platform built for JEE Advanced aspirants. It brings together structured notes, previous year papers, practice tests, and formula sheets for Physics, Chemistry, and Mathematics — all in one place, with no paywalls, no locked chapters, and no premium tier.
 
-AyuVerse is a free study hub for JEE Advanced aspirants — structured notes, previous year papers, and practice tests for **Physics**, **Chemistry**, and **Mathematics**, all in one place, all free.
-
-This repo currently contains the **home page** and the site scaffold. Subject pages (`physics.html`, `maths.html`, `chemistry.html`) are live as branded "coming soon" placeholders, ready for real content next.
+🔗 **Live site:** [maurya-ayush02.github.io](https://maurya-ayush02.github.io)
 
 ---
 
-## What's inside
+## ✨ Why AyuVerse?
 
-- Fully responsive home page (mobile menu, animated hero, subject cards, resources preview, about, contact)
-- Animated announcement ticker at the very top
-- A subjects dropdown in the nav (Physics / Mathematics / Chemistry)
-- Custom favicon + app icons generated from your logo
-- GitHub Codespaces config — opens ready to preview, no setup
-- GitHub Actions workflow to auto-deploy to GitHub Pages
-- Plain HTML/CSS/JS — no build step, no framework required
+Good preparation shouldn't depend on how much you can pay. AyuVerse exists to put complete JEE Advanced material in front of any student who wants it — organized the way you'll actually use it while studying.
 
-## Folder structure
+> If it helps you prepare, it belongs here for free.
+
+---
+
+## 📚 Core Subjects
+
+- **Physics** — Mechanics, electromagnetism, optics, and modern physics, explained the way JEE actually tests them.
+- **Chemistry** — Physical, organic, and inorganic chemistry — reactions and concepts explained so they actually stick.
+- **Mathematics** — Calculus, algebra, coordinate geometry, and trigonometry, with problems that build real speed.
+
+---
+
+## 🧰 What's Inside
+
+| Feature | Description |
+|---|---|
+| 📄 **Structured Notes** | Concept-first notes for every chapter, written to build understanding, not just cover the syllabus. |
+| 📘 **Previous Year Papers** | Solved JEE Advanced papers, year by year, with clear step-by-step solutions. |
+| ⏱️ **Practice Tests** | Timed tests that mirror the real exam format, built to train pace as much as accuracy. |
+| 📋 **Formula Sheets** | Quick-reference sheets for every subject, built for fast revision before an exam. |
+
+---
+
+## 🖥️ Tech Stack
+
+- HTML5 / CSS3 / JavaScript
+- Hosted via **GitHub Pages**
+
+---
+
+## 🚀 Getting Started (Local Development)
+
+```bash
+# Clone the repository
+git clone https://github.com/maurya-ayush02/AyuVerse-.git
+
+# Navigate into the project folder
+cd AyuVerse-
+
+# Install dev dependency (optional local server)
+npm install
+
+# Serve locally on port 3000
+npm start
+```
+
+No build tools required — it's a static site. You can also just open `index.html` directly in your browser.
+
+---
+
+## 📁 Project Structure
 
 ```
-ayuverse/
-├── .devcontainer/
-│   └── devcontainer.json      # Codespaces config
-├── .github/
-│   └── workflows/
-│       └── deploy.yml         # auto-deploy to GitHub Pages
-├── assets/
-│   └── images/                # logo, icons, subject artwork
+AyuVerse-/
+├── index.html
+├── physics.html
+├── maths.html
+├── chemistry.html
+├── 404.html
 ├── css/
 │   └── style.css
 ├── js/
 │   └── script.js
-├── index.html                 # home page
-├── physics.html                # placeholder — full page next
-├── maths.html                  # placeholder — full page next
-├── chemistry.html              # placeholder — full page next
-├── 404.html
+├── assets/
+│   └── images/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml
+├── .devcontainer/
+│   └── devcontainer.json
 ├── site.webmanifest
 ├── favicon.ico
 ├── package.json
-├── LICENSE
-└── .gitignore
+└── README.md
 ```
-
-## Run it locally / in Codespaces
-
-1. Open this repo in **GitHub Codespaces** (or clone it and open in VS Code).
-2. The dev container installs dependencies automatically on first boot.
-3. Start the preview server:
-   ```bash
-   npm start
-   ```
-4. Codespaces will pop up a forwarded-port preview automatically on port `3000`. Locally, open `http://localhost:3000`.
-
-No Node experience needed — you can also just right-click `index.html` and choose **"Open with Live Server"** if you're using the VS Code extension (already recommended in the dev container).
-
-## Push this to GitHub (create the repo)
-
-You'll need to create the GitHub repo yourself (from github.com or the `gh` CLI) — here's the fastest path:
-
-```bash
-# 1. Unzip the download, then from inside the ayuverse folder:
-git init
-git add .
-git commit -m "Initial commit: AyuVerse home page"
-
-# 2. Create the repo on GitHub (pick ONE option):
-
-# Option A — using GitHub CLI (if installed)
-gh repo create ayuverse --public --source=. --remote=origin --push
-
-# Option B — manually
-# Go to github.com/new, create a repo named "ayuverse" (don't add a README there),
-# then run:
-git branch -M main
-git remote add origin https://github.com/<your-username>/ayuverse.git
-git push -u origin main
-```
-
-## Deploy for free (GitHub Pages)
-
-1. In your new repo on GitHub: **Settings → Pages**.
-2. Under "Build and deployment", set **Source** to **GitHub Actions**.
-3. Push to `main` — the included workflow (`.github/workflows/deploy.yml`) builds and deploys automatically.
-4. Your site will be live at `https://<your-username>.github.io/ayuverse/`.
-
-## Before you go live — a few placeholders to swap
-
-- `hello@ayuverse.com` — appears in `index.html` and the footer of every page. Search for `TODO` comments and replace with your real email.
-- The GitHub link in the footer (`https://github.com/`) — point it at your actual profile or repo.
-- `LICENSE` — MIT license is applied to the **code**. If you want different terms for the actual study content you add later (notes, PDFs, etc.), that's a separate decision worth making explicitly.
-
-## Roadmap
-
-- [x] Home page
-- [x] Site-wide design system, favicon/icons, mobile nav
-- [ ] Physics hub (notes, PYQs, tests)
-- [ ] Mathematics hub
-- [ ] Chemistry hub
-- [ ] Resources library page
 
 ---
 
-Built with plain HTML, CSS, and JavaScript — no framework, no build step.
+## 🤝 Contributing
+
+Contributions are welcome! If you'd like to add notes, fix bugs, or improve the UI:
+
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature/your-feature`)
+3. Commit your changes
+4. Open a pull request
+
+---
+
+## 👤 Creator
+
+**Ayush Maurya**
+📍 Mariahu, Jaunpur, Uttar Pradesh
+🎓 Class 10 · Batch 2026–27
+
+---
+
+## 📄 License
+
+© 2026 AyuVerse. Free forever for JEE Advanced aspirants.
+
+---
+
+## 📬 Contact
+
+Have questions or suggestions? Reach out via Email or GitHub — links available on the site footer.
