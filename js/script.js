@@ -10,7 +10,54 @@
   }
 })();
 
-// ===== Mobile nav + Subjects dropdown =====
+// ===== Cookie Consent Banner =====
+(function () {
+  const banner = document.getElementById('cookieBanner');
+  const allowBtn = document.getElementById('cookieAllow');
+  const denyBtn = document.getElementById('cookieDeny');
+  const toast = document.getElementById('toast');
+
+  if (!banner) return;
+
+  // Already decided — don't show banner
+  if (localStorage.getItem('ayuverse_cookies')) return;
+
+  // Show banner after a short delay so page load feels clean
+  setTimeout(() => { banner.hidden = false; }, 800);
+
+  function hideBanner() {
+    banner.hidden = true;
+  }
+
+  function showToast() {
+    if (!toast) return;
+    toast.hidden = false;
+    setTimeout(() => {
+      toast.classList.add('toast--out');
+      toast.addEventListener('animationend', () => { toast.hidden = true; }, { once: true });
+    }, 4000);
+  }
+
+  allowBtn.addEventListener('click', () => {
+    localStorage.setItem('ayuverse_cookies', 'allowed');
+    hideBanner();
+    // Request push notification permission
+    if ('Notification' in window && Notification.permission === 'default') {
+      Notification.requestPermission().then((perm) => {
+        if (perm === 'granted') showToast();
+      });
+    } else if ('Notification' in window && Notification.permission === 'granted') {
+      showToast();
+    }
+  });
+
+  denyBtn.addEventListener('click', () => {
+    localStorage.setItem('ayuverse_cookies', 'denied');
+    hideBanner();
+  });
+})();
+
+
 (function () {
   const toggle = document.getElementById('navToggle');
   const menu = document.getElementById('navMenu');
