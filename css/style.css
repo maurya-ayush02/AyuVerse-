@@ -476,7 +476,7 @@ p { margin: 0; }
     width: calc(100% - 1rem);
   }
   .nav__dropdown-panel.is-open {
-    max-height: 220px;
+    max-height: 260px;
     pointer-events: auto;
     padding: .25rem 0;
   }
