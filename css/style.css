@@ -500,7 +500,7 @@ p { margin: 0; }
     color: var(--c-cyan);
     background: rgba(255,255,255,0.07);
   }
-  .nav__dropdown-panel img { display: none; }
+  .nav__dropdown-panel img { display: none; width: 0; height: 0; }
 
   /* CTA button */
   .nav__cta {
