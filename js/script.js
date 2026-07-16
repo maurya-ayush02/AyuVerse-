@@ -17,16 +17,20 @@
   const denyBtn = document.getElementById('cookieDeny');
   const toast = document.getElementById('toast');
 
-  if (!banner) return;
+  if (!banner || !allowBtn || !denyBtn) return;
 
-  // Already decided — don't show banner
+  // Already decided — don't show banner again
   if (localStorage.getItem('ayuverse_cookies')) return;
 
-  // Show banner after a short delay so page load feels clean
   setTimeout(() => { banner.hidden = false; }, 800);
 
   function hideBanner() {
-    banner.hidden = true;
+    banner.style.transition = 'opacity .25s, transform .3s';
+    banner.style.opacity = '0';
+    banner.style.transform = window.innerWidth <= 540
+      ? 'translateY(110%)'
+      : 'translateX(-50%) translateY(110%)';
+    setTimeout(() => { banner.hidden = true; }, 320);
   }
 
   function showToast() {
@@ -41,7 +45,6 @@
   allowBtn.addEventListener('click', () => {
     localStorage.setItem('ayuverse_cookies', 'allowed');
     hideBanner();
-    // Request push notification permission
     if ('Notification' in window && Notification.permission === 'default') {
       Notification.requestPermission().then((perm) => {
         if (perm === 'granted') showToast();

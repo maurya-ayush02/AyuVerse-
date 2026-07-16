@@ -532,15 +532,15 @@ p { margin: 0; }
    Cookie Consent Banner
 ========================================================== */
 @keyframes cookie-slide-up {
-  from { transform: translateY(110%); opacity: 0; }
-  to   { transform: translateY(0);    opacity: 1; }
+  from { transform: translate(-50%, 110%); opacity: 0; }
+  to   { transform: translate(-50%, 0);   opacity: 1; }
 }
 .cookie-banner {
   position: fixed;
   bottom: 1.5rem;
   left: 50%;
   transform: translateX(-50%);
-  width: min(760px, calc(100vw - 2rem));
+  width: min(720px, calc(100vw - 2rem));
   z-index: 200;
   background: var(--bg-surface-2);
   border: 1px solid var(--border-strong);
@@ -552,41 +552,58 @@ p { margin: 0; }
 .cookie-banner__inner {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  padding: 1.25rem 1.75rem;
+  gap: 1rem 1.5rem;
+  padding: 1.1rem 1.5rem;
   flex-wrap: wrap;
 }
-.cookie-banner__text { flex: 1; min-width: 220px; }
+.cookie-banner__text {
+  flex: 1;
+  min-width: min(260px, 100%);
+}
 .cookie-banner__title {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 1rem;
+  font-size: .95rem;
   color: var(--text-primary);
-  margin-bottom: .35rem;
+  margin-bottom: .25rem;
 }
 .cookie-banner__text p:last-child {
   color: var(--text-secondary);
-  font-size: .88rem;
-  line-height: 1.55;
+  font-size: .84rem;
+  line-height: 1.5;
 }
 .cookie-banner__actions {
   display: flex;
-  gap: .75rem;
+  gap: .6rem;
   flex-shrink: 0;
-  width: 100%;
-  justify-content: flex-end;
+  align-items: center;
 }
-@media (max-width: 600px) {
+@media (max-width: 540px) {
+  .cookie-banner {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: none;
+    width: 100%;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    animation: cookie-slide-up-mobile .45s var(--ease) both;
+  }
+  @keyframes cookie-slide-up-mobile {
+    from { transform: translateY(110%); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
   .cookie-banner__inner {
-    padding: 1rem 1.25rem;
-    gap: .9rem;
+    padding: 1rem 1.25rem 1.25rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: .75rem;
   }
   .cookie-banner__actions {
-    justify-content: stretch;
+    width: 100%;
+    gap: .5rem;
   }
   .cookie-banner__actions .btn {
     flex: 1;
-    justify-content: center;
   }
 }
 
