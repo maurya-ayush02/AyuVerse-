@@ -556,7 +556,7 @@ p { margin: 0; }
   padding: 1.25rem 1.75rem;
   flex-wrap: wrap;
 }
-.cookie-banner__text { flex: 1; min-width: 0; }
+.cookie-banner__text { flex: 1; min-width: 220px; }
 .cookie-banner__title {
   font-family: var(--font-display);
   font-weight: 600;
@@ -573,6 +573,21 @@ p { margin: 0; }
   display: flex;
   gap: .75rem;
   flex-shrink: 0;
+  width: 100%;
+  justify-content: flex-end;
+}
+@media (max-width: 600px) {
+  .cookie-banner__inner {
+    padding: 1rem 1.25rem;
+    gap: .9rem;
+  }
+  .cookie-banner__actions {
+    justify-content: stretch;
+  }
+  .cookie-banner__actions .btn {
+    flex: 1;
+    justify-content: center;
+  }
 }
 
 /* ==========================================================
