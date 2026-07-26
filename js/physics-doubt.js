@@ -8,19 +8,19 @@ document.getElementById("brand-mark-img").src = "assets/images/icon-mark.webp";
 ========================================================== */
 
 const CHAPTERS = [
-  { id: "kinematics",   name: "Kinematics" },
-  { id: "laws",         name: "Laws of Motion" },
-  { id: "wep",          name: "Work, Energy & Power" },
-  { id: "rotation",     name: "Rotational Motion" },
-  { id: "gravitation",  name: "Gravitation" },
-  { id: "shmwaves",     name: "SHM & Waves" },
-  { id: "electrostat",  name: "Electrostatics" },
-  { id: "current",      name: "Current Electricity" },
-  { id: "magnetism",    name: "Magnetism & EMI" },
-  { id: "optics",       name: "Optics" },
-  { id: "modern",       name: "Modern Physics" },
-  { id: "thermo",       name: "Thermodynamics" },
-  { id: "fluids",       name: "Fluid Mechanics" },
+  { id: "kinematics", name: "Kinematics" },
+  { id: "laws", name: "Laws of Motion" },
+  { id: "wep", name: "Work, Energy & Power" },
+  { id: "rotation", name: "Rotational Motion" },
+  { id: "gravitation", name: "Gravitation" },
+  { id: "shmwaves", name: "SHM & Waves" },
+  { id: "electrostat", name: "Electrostatics" },
+  { id: "current", name: "Current Electricity" },
+  { id: "magnetism", name: "Magnetism & EMI" },
+  { id: "optics", name: "Optics" },
+  { id: "modern", name: "Modern Physics" },
+  { id: "thermo", name: "Thermodynamics" },
+  { id: "fluids", name: "Fluid Mechanics" },
 ];
 
 const DOUBTS = [
@@ -99,6 +99,54 @@ const solveBtn = document.getElementById("solve-btn");
 const statusEl = document.getElementById("ai-status");
 const errorEl = document.getElementById("ai-error");
 
+const imageInputEl = document.getElementById("image-input");
+const cameraInputEl = document.getElementById("camera-input");
+const attachImgBtn = document.getElementById("attach-img-btn");
+const snapCamBtn = document.getElementById("snap-cam-btn");
+const imagePreviewContainer = document.getElementById("image-preview-container");
+const imagePreviewEl = document.getElementById("image-preview");
+const removeImgBtn = document.getElementById("remove-img-btn");
+
+let currentImageData = null;
+
+attachImgBtn.addEventListener("click", () => imageInputEl.click());
+snapCamBtn.addEventListener("click", () => cameraInputEl.click());
+
+function handleImageSelect(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  if (file.size > 5 * 1024 * 1024) { // 5MB limit check
+    errorEl.textContent = "Image size must be smaller than 5MB.";
+    errorEl.classList.remove("hidden");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function (evt) {
+    const dataUrl = evt.target.result;
+    const [header, base64] = dataUrl.split(",");
+    const mimeType = header.match(/:(.*?);/)[1];
+
+    currentImageData = { mimeType, dataBase64: base64 };
+    imagePreviewEl.src = dataUrl;
+    imagePreviewContainer.classList.remove("hidden");
+    errorEl.classList.add("hidden");
+  };
+  reader.readAsDataURL(file);
+}
+
+imageInputEl.addEventListener("change", handleImageSelect);
+cameraInputEl.addEventListener("change", handleImageSelect);
+
+removeImgBtn.addEventListener("click", () => {
+  currentImageData = null;
+  imageInputEl.value = "";
+  cameraInputEl.value = "";
+  imagePreviewContainer.classList.add("hidden");
+  imagePreviewEl.src = "";
+});
+
 let studentName = "";
 let chatHistory = []; // [{ role: "user" | "ai", text }]
 
@@ -146,12 +194,20 @@ function addMessage(role, text) {
 }
 
 async function sendToTutor(text) {
-  addMessage("user", text);
+  const payloadMessage = { role: "user", text: text };
+
+  if (currentImageData) {
+    payloadMessage.image = currentImageData;
+  }
+
+  addMessage("user", text || "[Attached Image]");
+  removeImgBtn.click();
+
   errorEl.classList.add("hidden");
   solveBtn.disabled = true;
   statusEl.classList.remove("hidden");
 
-  // keep only the most recent turns so requests stay small
+  chatHistory.push(payloadMessage);
   const trimmedHistory = chatHistory.slice(-MAX_HISTORY_MESSAGES);
 
   try {
@@ -178,13 +234,8 @@ async function sendToTutor(text) {
 
 function askQuestion() {
   const question = questionEl.value.trim();
-  if (!question) {
-    errorEl.textContent = "Type or paste a physics question first.";
-    errorEl.classList.remove("hidden");
-    return;
-  }
-  if (WORKER_URL.includes("YOUR-SUBDOMAIN")) {
-    errorEl.textContent = "The AI tutor isn't connected yet — deploy the Worker and set WORKER_URL in physics-doubt.js.";
+  if (!question && !currentImageData) {
+    errorEl.textContent = "Type a question or attach an image first.";
     errorEl.classList.remove("hidden");
     return;
   }
