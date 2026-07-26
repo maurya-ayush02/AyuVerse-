@@ -165,8 +165,8 @@ function storeName(name) {
   }
 }
 
-function addMessage(role, text) {
-  chatHistory.push({ role, text });
+function addMessage(role, text, extra) {
+  chatHistory.push(Object.assign({ role, text }, extra));
 
   const msg = document.createElement("div");
   msg.className = `msg ${role}`;
@@ -194,20 +194,15 @@ function addMessage(role, text) {
 }
 
 async function sendToTutor(text) {
-  const payloadMessage = { role: "user", text: text };
+  const extra = currentImageData ? { image: currentImageData } : undefined;
 
-  if (currentImageData) {
-    payloadMessage.image = currentImageData;
-  }
-
-  addMessage("user", text || "[Attached Image]");
+  addMessage("user", text || "[Attached Image]", extra);
   removeImgBtn.click();
 
   errorEl.classList.add("hidden");
   solveBtn.disabled = true;
   statusEl.classList.remove("hidden");
 
-  chatHistory.push(payloadMessage);
   const trimmedHistory = chatHistory.slice(-MAX_HISTORY_MESSAGES);
 
   try {
