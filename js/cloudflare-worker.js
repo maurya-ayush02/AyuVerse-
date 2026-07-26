@@ -95,7 +95,7 @@ export default {
       }
       const parts = [];
       if (text) parts.push({ text });
-      if (image) parts.push({ inline_data: { mime_type: image.mimeType, data: image.dataBase64 } });
+      if (image) parts.push({ inlineData: { mimeType: image.mimeType, data: image.dataBase64 } });
       contents.push({ role, parts });
     }
     if (contents[contents.length - 1].role !== "user") {
