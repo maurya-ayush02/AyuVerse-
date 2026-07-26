@@ -88,11 +88,15 @@ export default {
     for (const m of rawMessages) {
       const text = m && m.text ? String(m.text).trim() : "";
       const role = m && m.role === "ai" ? "model" : "user";
-      if (!text) return json({ error: "Every message must have text" }, 400);
+      const image = m && m.image && m.image.dataBase64 ? m.image : null;
+      if (!text && !image) return json({ error: "Every message must have text" }, 400);
       if (text.length > MAX_MESSAGE_LENGTH) {
         return json({ error: `A message is too long (max ${MAX_MESSAGE_LENGTH} characters)` }, 400);
       }
-      contents.push({ role, parts: [{ text }] });
+      const parts = [];
+      if (text) parts.push({ text });
+      if (image) parts.push({ inline_data: { mime_type: image.mimeType, data: image.dataBase64 } });
+      contents.push({ role, parts });
     }
     if (contents[contents.length - 1].role !== "user") {
       return json({ error: "Conversation must end with the student's message" }, 400);
