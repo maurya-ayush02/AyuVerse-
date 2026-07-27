@@ -214,7 +214,9 @@ async function sendToTutor(text) {
     const data = await res.json().catch(() => null);
 
     if (!res.ok || !data || data.error) {
-      throw new Error((data && data.error) || `Request failed (${res.status})`);
+      const base = (data && data.error) || `Request failed (${res.status})`;
+      const detail = data && data.detail ? `: ${data.detail}` : "";
+      throw new Error(base + detail);
     }
 
     addMessage("ai", data.answer || "No response was returned — try rephrasing your question.");
